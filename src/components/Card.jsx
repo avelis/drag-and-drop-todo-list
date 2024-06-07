@@ -11,7 +11,18 @@ const Card = ({ todo, onChange }) => {
     return <EditableCard todo={todo} onSubmit={handleSubmit} />;
   }
 
-  return <div onClick={() => setIsEditable(true)}>{todo.text}</div>;
+  return (
+    <div
+      onClick={() => setIsEditable(true)}
+      style={{
+        border: "1px solid lightgray",
+        padding: "10px",
+        margin: "5px 0",
+      }}
+    >
+      {todo.text}
+    </div>
+  );
 };
 
 export default Card;

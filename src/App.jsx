@@ -1,7 +1,6 @@
-import RandomQuote from "./RandomQuote";
-
+import ToDoList from "./components/ToDoList";
 function App() {
-  return <RandomQuote />;
+  return <ToDoList />;
 }
 
 export default App;
