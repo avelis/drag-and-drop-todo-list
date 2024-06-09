@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { DndContext } from "@dnd-kit/core";
 import TaskColumn from "./TaskColumn";
+import { PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 
 const ToDoList = () => {
   const [todos, setTodos] = useState([
@@ -9,6 +10,13 @@ const ToDoList = () => {
     { id: 3, text: "do the budget", status: "done" },
     { id: 4, text: "call jane", status: "to-do" },
   ]);
+  // add a little delay before dragging starts, to allow also clicking on the cards
+  // otherwise dragging is taking over click events as well
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: { delay: 100, tolerance: 5 },
+    })
+  );
 
   const handleDragEnd = ({ active, over }) => {
     const draggedTodoId = active.id;
@@ -35,7 +43,7 @@ const ToDoList = () => {
   };
 
   return (
-    <DndContext onDragEnd={handleDragEnd}>
+    <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <TaskColumn
           title="To do"

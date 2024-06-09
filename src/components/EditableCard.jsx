@@ -9,7 +9,15 @@ const EditableCard = ({ todo, onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        border: "1px solid lightgray",
+        padding: "10px",
+        margin: "5px 0",
+        backgroundColor: "lightblue",
+      }}
+    >
       <input
         type="text"
         value={updatedText}
