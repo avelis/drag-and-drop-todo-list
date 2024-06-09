@@ -2,15 +2,13 @@ import TaskColumn from "./TaskColumn";
 import { DndContext } from "@dnd-kit/core";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
+import DropToDeleteArea from "./DropToDeleteArea";
 
 const ToDoList = ({ todos: initialTodos }) => {
   const [todos, setTodos] = useState(initialTodos);
   const [newTodoText, setNewTodoText] = useState("");
 
-  const handleDragEnd = ({ active, over }) => {
-    const draggedTodoId = active.id;
-    const droppedColumnTitle = over.id;
-
+  const updateTodoStatus = (draggedTodoId, droppedColumnTitle) => {
     const statusByColumn = {
       "To do": "to-do",
       "In progress": "in-progress",
@@ -29,6 +27,24 @@ const ToDoList = ({ todos: initialTodos }) => {
         }
       })
     );
+  };
+
+  const deleteTodo = (draggedTodoId) => {
+    setTodos(todos.filter((todo) => todo.id !== draggedTodoId));
+  };
+
+  const handleDragEnd = ({ active, over }) => {
+    if (!over) {
+      // if user dropped the task outside any droppable area, return
+      return;
+    }
+    const draggedTodoId = active.id;
+    const droppedAreaId = over.id;
+    if (droppedAreaId === "delete-task-area") {
+      deleteTodo(active.id);
+    } else {
+      updateTodoStatus(draggedTodoId, droppedAreaId);
+    }
   };
 
   const handleAddTodo = (e) => {
@@ -77,6 +93,7 @@ const ToDoList = ({ todos: initialTodos }) => {
           todos={todos.filter((t) => t.status === "done")}
         />
       </div>
+      <DropToDeleteArea />
     </DndContext>
   );
 };
