@@ -1,9 +1,36 @@
 import TaskColumn from "./TaskColumn";
 import { DndContext } from "@dnd-kit/core";
+import { useState } from "react";
 
-const ToDoList = ({ todos }) => {
+const ToDoList = ({ todos: initialTodos }) => {
+  const [todos, setTodos] = useState(initialTodos);
+
+  const handleDragEnd = ({ active, over }) => {
+    const draggedTodoId = active.id;
+    const droppedColumnTitle = over.id;
+
+    const statusByColumn = {
+      "To do": "to-do",
+      "In progress": "in-progress",
+      Done: "done",
+    };
+
+    setTodos(
+      todos.map((todo) => {
+        if (todo.id === draggedTodoId) {
+          return {
+            ...todo,
+            status: statusByColumn[droppedColumnTitle],
+          };
+        } else {
+          return todo;
+        }
+      })
+    );
+  };
+
   return (
-    <DndContext>
+    <DndContext onDragEnd={handleDragEnd}>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <TaskColumn
           title="To do"
