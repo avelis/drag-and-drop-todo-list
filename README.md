@@ -1,17 +1,20 @@
-# React + Vite
+# Build a drag and drop to-do list
 
-Basic React boilerplate using Vite.
+> This repository is the companion to the ["Build a drag and drop to-do list"](https://reactpractice.dev/exercise/build-a-drag-and-drop-to-do-list/) practice exercise.
 
-Starts off from the React Javascript Vite template ([@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh)
+Build a Kanban-style to do list, where you can drag the cards from one column to the other to mark them as "To do", "In Progress" or "Done".
 
-Adds on top:
+- app should have three columns: "To do", "In progress", "Done"
+- users can drag and drop cards from one column to the other
+- users can add tasks by typing into an input above the columns
+- users can delete tasks by dragging and dropping over a "trash" area at the bottom of the columns
 
-- support for testing React components with `vitest` and React Testing Library
-- support for mocking HTTP requests in tests using `msw`
+Check out [the exercise description](https://reactpractice.dev/exercise/build-a-drag-and-drop-to-do-list/) for more details and tips on the implementation.
 
-Getting started:
+To get started, you can clone this starter repo.
+When you're ready to check your work, check out [the official solution](https://reactpractice.dev/solution/how-to-build-a-drag-and-drop-to-do-list/).
+
+## Getting started:
 
 - `npm install`
 - `npm run dev`
-
-To run the tests: `npm run test`.
