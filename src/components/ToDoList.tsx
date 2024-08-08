@@ -29,8 +29,8 @@ const ToDoList = ({ todos: initialTodos }) => {
     setTodos([...todos]);
   };
 
-  const deleteTodo = (deleteId: any) => {
-    setTodos(todos.filter((todo: any) => todo.id !== deleteId));
+  const deleteTodo = (deleteTodoId: any) => {
+    setTodos(todos.filter((todo: any) => todo.id !== deleteTodoId));
   };
 
   const handleDragEnd = ({ over, active }) => {
