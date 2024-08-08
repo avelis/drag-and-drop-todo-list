@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import AddToDoForm from "./AddToDoForm";
-import TaskColumn from "./ToDoColumn";
+import TaskColumn from "./TaskColumn";
 import DeleteToDoArea from "./DeleteToDoArea";
 import { DndContext } from "@dnd-kit/core";
 import { v4 as uuid } from "uuid";
@@ -19,14 +19,15 @@ const ToDoList = ({ todos: initialTodos }) => {
     setTodos([...todos, { id: uuid(), text: newTodoText, status: "to-do" }]);
   };
 
-  const updateTodoStatus = (todoId, overId) => {
-    todos.map((todo: any) => {
-      if (todo.id === todoId) {
-        todo.status = statusMap[overId];
-      }
-    });
-
-    setTodos([...todos]);
+  const updateTodoStatus = (todoId: any, overId: any) => {
+    setTodos(
+      todos.map((todo: any) => {
+        if (todo.id === todoId) {
+          todo.status = statusMap[overId];
+        }
+        return todo;
+      })
+    );
   };
 
   const deleteTodo = (deleteTodoId: any) => {
